@@ -33,7 +33,7 @@ client.on("voiceStateUpdate",async  (oldState, newState) => {
     let newVoice = newState.channelID; 
     // console.log("oldVoice:"+oldVoice)
     // console.log("newVoice:"+newVoice)
-    if(oldVoice != newVoice && newVoice != null && oldVoice != null){
+    if(oldVoice != newVoice && newVoice != null && oldVoice == null){
      await join_voice(newState);
      await talk_voice();
     //  await  dis_voice();
