@@ -2,14 +2,15 @@ const Discord = require("discord.js");
 const client = new Discord.Client();
 const fs = require('fs');
 const path =require("path");
-
+// const voice_list = JSON.parse(process.env.LIST_VOICE);
 require("dotenv").config();
 require('events').EventEmitter.defaultMaxListeners = 15;
 // console.log((process.env.BOT_TOKEN))
-
+const voice_list = JSON.parse(process.env.LIST_VOICE);
 let connection;
 client.once("ready", (data) => {
-// console.log(client) 
+  // const voice_list = JSON.parse(process.env.LIST_VOICE);
+  console.log(voice_list);
   console.log("Ready!");
 });
 
@@ -29,6 +30,8 @@ client.on("message", (message) => {
   }
 });
 client.on("voiceStateUpdate",async  (oldState, newState) => {
+  // console.log(newState.member.user.bot)
+  if(newState.member.user.bot) return;
     let oldVoice = oldState.channelID; 
     let newVoice = newState.channelID; 
     // console.log("oldVoice:"+oldVoice)
@@ -52,11 +55,21 @@ async function join_voice(message) {
 async function dis_voice() {
   connection.disconnect();
 }
+function getRandomInt(max) {
+  return Math.floor(Math.random() * max);
+}
+
 
 function talk_voice(){
-    filePath =path.join(__dirname,"voice","test1.mp3")
+    // console.log(voice_list.length)
+    let rng = getRandomInt(voice_list.length)
+    // console.log(rng)
+    selected_voice =voice_list[rng]
+    // selected_voice =voice_list[2]
+    // console.log(selected_voice)
+    filePath =path.join(__dirname,"voice",selected_voice.path)
     const dispatcher =  connection.play(filePath,{
-        volume: 0.8,
+        volume: selected_voice.volume
       });
     // const dispatcher =  connection.play(ytdl('https://www.youtube.com/watch?v=ZlAU_w7-Xp8', { filter: 'audioonly' }));
     dispatcher.on('start', () => {
