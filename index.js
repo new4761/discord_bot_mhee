@@ -8,9 +8,10 @@ require('events').EventEmitter.defaultMaxListeners = 15;
 // console.log((process.env.BOT_TOKEN))
 const voice_list = JSON.parse(process.env.LIST_VOICE);
 let connection;
+
 client.once("ready", (data) => {
   // const voice_list = JSON.parse(process.env.LIST_VOICE);
-  console.log(voice_list);
+  //console.log(voice_list);
   console.log("Ready!");
 });
 
