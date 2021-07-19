@@ -5,13 +5,13 @@ const path =require("path");
 // const voice_list = JSON.parse(process.env.LIST_VOICE);
 require("dotenv").config();
 require('events').EventEmitter.defaultMaxListeners = 15;
-// console.log((process.env.BOT_TOKEN))
+console.log((process.env.BOT_TOKEN))
 const voice_list = JSON.parse(process.env.LIST_VOICE);
 let connection;
 
 client.once("ready", (data) => {
-  // const voice_list = JSON.parse(process.env.LIST_VOICE);
-  //console.log(voice_list);
+ const voice_list = JSON.parse(process.env.LIST_VOICE);
+  console.log(voice_list);
   console.log("Ready!");
 });
 
