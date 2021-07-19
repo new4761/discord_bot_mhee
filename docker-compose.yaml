@@ -1,0 +1,7 @@
+version: "3.7"
+services:
+  botmhee:
+    image: new4761/bot_mhee
+    restart: always
+    env_file:
+    - .env
